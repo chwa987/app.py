@@ -688,7 +688,12 @@ def sektor_filter(scan_df, max_pro_sektor=2):
 # ═══════════════════════════════════════════════════════
 # STABILITÄT — 2-WOCHEN-BESTÄTIGUNG
 # ═══════════════════════════════════════════════════════
+sektor = Reihe["Sektor"]
 
+# Unbekannt nicht limitieren
+if sektor == "Unbekannt" or pd.isna(sektor):
+    behalten.append(Reihe)
+    continue
 def _ensure_ranking_columns(conn):
     """
     Migrations-Schutz: Ergänzt fehlende Spalten in ranking_history.
